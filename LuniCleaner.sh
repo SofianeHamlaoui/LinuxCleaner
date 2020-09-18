@@ -221,33 +221,56 @@ function Lzypper {
 function Ldnf {
     which dnf > /dev/null 2>&1
     if [ "$?" -eq "0" ]; then
-        echo -e "   ${g} [-] 'Syncing Database '${endc}"
-        echo ""
-        dnf install go python python-pip python-requests python2 python2-pip gcc ruby php git wget bc curl netcat subversion jre-openjdk make automake gcc linux-headers gzip rsync wget
-        gem install bundler:1.17.2
-    else
-        echo -e "   ${g} [-] Skipping dnf${endc}"
+        echo -e "   ${g} [S] RPM-based Distribution detected ${endc}"
+        sleep 1
+        space
+        # Syncing
+        echo -e "   ${g} [-] Syncing Database ${endc}"
+        dnf update
+        space
+        # Cleaning
+        echo -e "   ${g} [-] Cleaning DNF's Cache${endc}"
+        space
+        echo -e "   ${r} [X] Be Careful, this eliminates the possibility of using downgrade${endc}"
+        echo -e "   ${r} [X] Do yo want to clean DNF's cache ?${endc}"
+        read -p "                           (Y/N) : " choice 
+        case "$choice" in 
+            y|Y )
+                dnf clean all;;
+            n|N ) ;;
+            * ) ;;
+        esac
+        # Removing unused packages
+        echo -e "   ${g} [-] Removing unused packages${endc}"
+        space
+        echo -e "   ${r} [X] Do yo want to Remove unused packages ?${endc}"
+        read -p "                           (Y/N) : " choice 
+        case "$choice" in 
+            y|Y )
+                zypper packages --unneeded | awk -F'|' 'NR==0 || NR==1 || NR==2 || NR==3 || NR==4 {next} {print $3}' > list
+                while read p; do sudo zypper -n rm -y "$p"; done < list
+                rm -rf list;;
+            n|N ) ;;
+            * ) ;;
+        esac
+        # Runing rmshit script
+        echo -e "   ${g} [-] Running RMshit script by Jakub Klinkovský @lahwaacz${endc}"
+        space
+        echo -e "   ${r} [X] Do you want to use Rmshit.py script ?${endc}"
+        read -p "                           (Y/N) : " choice 
+        case "$choice" in 
+            y|Y )
+                curl -O https://raw.githubusercontent.com/lahwaacz/Scripts/master/rmshit.py && python3 rmshit.py;;
+            n|N ) ;;
+            * ) ;;
+        esac
     fi
-    sleep 1
-}
-
-function Lyum {
-    which yum > /dev/null 2>&1
-    if [ "$?" -eq "0" ]; then
-        echo -e "   ${g} [-] 'Syncing Database '${endc}"
-        echo ""
-        yum install go python python-pip python-requests python2 python2-pip gcc ruby php git wget bc curl netcat subversion jre-openjdk make automake gcc linux-headers gzip rsync wget
-        gem install bundler:1.17.2
-    else
-        echo -e "   ${g} [-] Skipping yum${endc}"
-    fi
-    sleep 1
 }
 
 function cleanit {
     checkroot
     echo -e "${y}Checking Requirments : ${enda}"
     space && checkreq python3 && checkreq curl && checkreq wget
-    space && Lapt && Lpacman
+    space && Lapt && Lpacman && Lzypper && Ldnf
 }
 cleanit
