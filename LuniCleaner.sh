@@ -71,7 +71,7 @@ function checkreq {
     else
         echo -e " ${g} $2 NOT FOUND, installing it ...${endc}"
         space
-        $1 $2 > /dev/null 2>&1
+        $1 $2 > /dev/null
     fi
 }
 function Lapt {
