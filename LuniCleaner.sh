@@ -116,7 +116,7 @@ function Lapt {
         read -p "                           (Y/N) : " choice 
         case "$choice" in 
             y|Y )
-                curl -O https://raw.githubusercontent.com/lahwaacz/Scripts/master/rmshit.py && python3 rmshit.py;;
+                curl -O https://raw.githubusercontent.com/lahwaacz/Scripts/master/rmshit.py && python3 rmshit.py && rm rmshit.py;;
             n|N ) ;;
             * ) ;;
         esac
@@ -166,7 +166,7 @@ function Lpacman {
         read -p "                           (Y/N) : " choice 
         case "$choice" in 
             y|Y )
-                curl -O https://raw.githubusercontent.com/lahwaacz/Scripts/master/rmshit.py && python3 rmshit.py;;
+                curl -O https://raw.githubusercontent.com/lahwaacz/Scripts/master/rmshit.py && python3 rmshit.py && rm rmshit.py;;
             n|N ) ;;
             * ) ;;
         esac
@@ -217,7 +217,7 @@ function Lzypper {
         read -p "                           (Y/N) : " choice 
         case "$choice" in 
             y|Y )
-                curl -O https://raw.githubusercontent.com/lahwaacz/Scripts/master/rmshit.py && python3 rmshit.py;;
+                curl -O https://raw.githubusercontent.com/lahwaacz/Scripts/master/rmshit.py && python3 rmshit.py && rm rmshit.py;;
             n|N ) ;;
             * ) ;;
         esac
@@ -268,7 +268,7 @@ function Ldnf {
         read -p "                           (Y/N) : " choice 
         case "$choice" in 
             y|Y )
-                curl -O https://raw.githubusercontent.com/lahwaacz/Scripts/master/rmshit.py && python3 rmshit.py;;
+                curl -O https://raw.githubusercontent.com/lahwaacz/Scripts/master/rmshit.py && python3 rmshit.py && rm rmshit.py;;
             n|N ) ;;
             * ) ;;
         esac
