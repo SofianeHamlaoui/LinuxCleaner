@@ -1,4 +1,5 @@
 #!/bin/bash
+# Bismmilah 
 # Sofiane Hamaloui 2020
 #Github: https://github.com/SofianeHamlaoui
 
@@ -15,7 +16,6 @@ c='\E[36m'
 w='\E[37m'
 endc='\E[0m'
 enda='\033[0m'
-
 function space {
     echo ""
 }
@@ -69,7 +69,7 @@ function checkreq {
     if [ "$?" -eq "0" ]; then
         echo -e " ${c} $2 ${enda}Found !!"
     else
-        echo -e " ${g} $2 not found, installing it ...${endc}"
+        echo -e " ${g} $2 NOT FOUND, installing it ...${endc}"
         space
         $1 $2
     fi
@@ -78,8 +78,7 @@ function Lapt {
     which apt > /dev/null 2>&1
     if [ "$?" -eq "0" ]; then
         echo -e "${y}Checking Requirments : ${enda}"
-        install="apt install"
-        space && checkreq $install python3 && checkreq $install curl && checkreq $install wget
+        space && checkreq "apt install" python3 && checkreq "apt install" curl && checkreq "apt install" wget && space
         echo -e "   ${g} [S] Apt-Based Distribution detected ${endc}"
         sleep 1
         space
@@ -128,6 +127,8 @@ function Lapt {
 function Lpacman {
     which pacman > /dev/null 2>&1
     if [ "$?" -eq "0" ]; then
+        echo -e "${y}Checking Requirments : ${enda}"
+        space && checkreq "pacman -S" python3 && checkreq "pacman -S" curl && checkreq "pacman -S" wget && space
         echo -e "   ${g} [S] Pacman-Based Distribution detected ${endc}"
         sleep 1
         space
@@ -175,6 +176,8 @@ function Lpacman {
 function Lzypper {
     which zypper > /dev/null 2>&1
     if [ "$?" -eq "0" ]; then
+        echo -e "${y}Checking Requirments : ${enda}"
+        space && checkreq "zypper install" python3 && checkreq "zypper install" curl && checkreq "zypper install" wget && space
         echo -e "   ${g} [S] SUSE-Based Distribution detected ${endc}"
         sleep 1
         space
@@ -224,11 +227,13 @@ function Lzypper {
 function Ldnf {
     which dnf > /dev/null 2>&1
     if [ "$?" -eq "0" ]; then
+        echo -e "${y}Checking Requirments : ${enda}"
+        space && checkreq "dnf install" python3 && checkreq "dnf install" curl && checkreq "dnf install" wget && space
         echo -e "   ${g} [S] RPM-based Distribution detected ${endc}"
         sleep 1
         space
         # Syncing
-        echo -e "   ${g} [-] Syncing Database ${endc}"
+        echo -e # Run "   ${g} [-] Syncing Database ${endc}"
         dnf update
         space
         # Cleaning
@@ -256,7 +261,7 @@ function Ldnf {
             n|N ) ;;
             * ) ;;
         esac
-        # Runing rmshit script
+        # Runing rmshit script    echo -e "${y}Checking Requirments : ${enda}"
         echo -e "   ${g} [-] Running RMshit script by Jakub Klinkovský @lahwaacz${endc}"
         space
         echo -e "   ${r} [X] Do you want to use Rmshit.py script ?${endc}"
@@ -272,8 +277,7 @@ function Ldnf {
 
 function cleanit {
     checkroot
-    echo -e "${y}Checking Requirments : ${enda}"
-    space && checkreq python3 && checkreq curl && checkreq wget
     space && Lapt && Lpacman && Lzypper && Ldnf
 }
+# Run 
 cleanit
