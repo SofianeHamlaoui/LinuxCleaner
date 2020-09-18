@@ -65,18 +65,21 @@ function checkroot {
   fi
 }
 function checkreq {
-    which $1 > /dev/null 2>&1
+    which $2 > /dev/null 2>&1
     if [ "$?" -eq "0" ]; then
-        echo -e " ${c} $1 ${enda}Found !!"
+        echo -e " ${c} $2 ${enda}Found !!"
     else
-        echo -e " ${g} $1 not found, installing it ...${endc}"
+        echo -e " ${g} $2 not found, installing it ...${endc}"
         space
-        pacman -S python
+        $1 $2
     fi
 }
 function Lapt {
     which apt > /dev/null 2>&1
     if [ "$?" -eq "0" ]; then
+        echo -e "${y}Checking Requirments : ${enda}"
+        install="apt install"
+        space && checkreq $install python3 && checkreq $install curl && checkreq $install wget
         echo -e "   ${g} [S] Apt-Based Distribution detected ${endc}"
         sleep 1
         space
