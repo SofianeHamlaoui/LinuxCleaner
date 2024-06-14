@@ -13,3 +13,5 @@ A *nix system cleaner for all linux distributions
 
 ### Apt-Based
 
+![](https://i.imgur.com/GixDdEu.png)
+
