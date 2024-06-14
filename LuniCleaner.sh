@@ -177,7 +177,7 @@ function Lzypper {
     which zypper > /dev/null 2>&1
     if [ "$?" -eq "0" ]; then
         echo -e "${y}Checking Requirments : ${enda}"
-        space && checkreq "zypper install" python3 && checkreq "zypper install" curl && checkreq "zypper install" wget && space
+        space && checkreq "zypper install" python && checkreq "zypper install" curl && checkreq "zypper install" wget && space
         echo -e "   ${g} [S] SUSE-Based Distribution detected ${endc}"
         sleep 1
         space
