@@ -15,3 +15,10 @@ A *nix system cleaner for all linux distributions
 
 ![](https://i.imgur.com/GixDdEu.png)
 
+### RPM-Based
+
+![](https://i.imgur.com/obgAAxw.png)
+
+### Suse-Based
+
+![](https://i.imgur.com/SWvgEUL.png)
